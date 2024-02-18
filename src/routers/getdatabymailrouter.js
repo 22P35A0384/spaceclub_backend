@@ -1,4 +1,4 @@
-import Getdatabymail from "../controllers/getdatabymail";
+import Getdatabymail from "../controllers/getdatabymail.js";
 import express from 'express';
 const Router = express.Router();
 

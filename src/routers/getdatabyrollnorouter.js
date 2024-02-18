@@ -1,4 +1,4 @@
-import Getdatabyrollno from "../controllers/getdatabyrollno";
+import Getdatabyrollno from "../controllers/getdatabyrollno.js";
 import express from 'express';
 const Router = express.Router();
 

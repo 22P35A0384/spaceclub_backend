@@ -1,4 +1,4 @@
-import Checkmail from "../controllers/checkmail";
+import Checkmail from "../controllers/checkmail.js";
 import express from 'express';
 const Router = express.Router()
 

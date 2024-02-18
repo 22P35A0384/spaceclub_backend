@@ -1,4 +1,4 @@
-import Getimg from "../controllers/getimg";
+import Getimg from "../controllers/getimg.js";
 import express from 'express';
 const Router = express.Router();
 

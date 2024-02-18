@@ -1,4 +1,4 @@
-import Sendotp from '../controllers/sendotptomail';
+import Sendotp from '../controllers/sendotptomail.js';
 import express from 'express';
 const Router = express.Router();
 

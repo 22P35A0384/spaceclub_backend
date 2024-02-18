@@ -1,4 +1,4 @@
-import Userschema from '../models/newuser';
+import Userschema from '../models/newuser.js';
 
 const Updatepass = async (req, res, next) => {
     const mail = req.body.email;

@@ -1,4 +1,4 @@
-import Updatepass from "../controllers/updatepass";
+import Updatepass from "../controllers/updatepass.js";
 import express from 'express';
 const Router = express.Router();
 

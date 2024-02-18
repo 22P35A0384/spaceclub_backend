@@ -1,4 +1,4 @@
-import Userschema from '../models/newuser';
+import Userschema from '../models/newuser.js';
 import bcrypt from 'bcryptjs';
 
 const PostLogin = async(req,res,next)=>{

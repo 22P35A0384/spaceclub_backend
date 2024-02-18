@@ -1,4 +1,4 @@
-import PostLogin from "../controllers/Getlogin";
+import PostLogin from "../controllers/Getlogin.js";
 import express from 'express'
 const Router = express.Router()
 

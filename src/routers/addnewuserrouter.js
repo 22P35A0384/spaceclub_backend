@@ -1,4 +1,4 @@
-import Addnewuser from '../controllers/addnewuser';
+import Addnewuser from '../controllers/addnewuser.js';
 import express from 'express';
 import multer from 'multer';
 const Router = express.Router();

@@ -1,4 +1,4 @@
-import Getprofile from '../controllers/getprofile';
+import Getprofile from '../controllers/getprofile.js';
 import express from 'express';
 const Router = express.Router();
 

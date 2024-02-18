@@ -1,4 +1,4 @@
-import Userschema from '../models/newuser';
+import Userschema from '../models/newuser.js';
 
 const Checkmail = async(req,res,next)=>{
     const mail = req.params.mail
