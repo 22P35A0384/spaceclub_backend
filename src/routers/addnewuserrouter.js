@@ -5,7 +5,7 @@ const Router = express.Router();
 
 const storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, 'https://github.com/22P35A0384/spaceclub_backend/tree/main/public/profiles')
+        callback(null, 'public/profiles')
     },
     filename: function (req, file, callback) {
         // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
