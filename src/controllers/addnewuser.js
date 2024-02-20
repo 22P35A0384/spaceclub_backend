@@ -1,6 +1,8 @@
 import Newuserschema from '../models/newuser.js';
 import nodemailer from 'nodemailer';
 import bcrypt from 'bcryptjs';
+import fs from 'fs';
+import handlebars from 'handlebars';
 
 
 const Addnewuser = async(req,res,next)=>{
@@ -24,22 +26,16 @@ const Addnewuser = async(req,res,next)=>{
               pass: 'aqlp joww mqgk fmbw'
             }
         });
-          
+        const source = fs.readFileSync('public/mail_templates/otpEmail.hbs', 'utf8');
+        const template = handlebars.compile(source);
+        const Name = fname+" "+lname
+        // Render the template with OTP
+        const html = template({ otp,Name });
         var mailOptions = {
             from: 'technicalhubdriverready@gmail.com',
             to: email,
-            subject: 'Welcome To ASTEC!',
-            text: 'Hello '+fname+' '+lname+', Thanks For Registering,On behalf of everyone at ASTEC, I am thrilled to extend a warm welcome to you as our newest member! 🚀✨',
-            attachments:[{
-                filename:profile,
-                path:'public/profiles/'+profile
-            },{
-                filename:'nav_icon.jpg',
-                path:'public/images/nav_icon.jpg'
-            },{
-                filename:'astec.pdf',
-                path:'public/pdfs/astec.pdf'
-            }]
+            subject: 'Welcome To ASTE',
+            html:html
         };
           
         transporter.sendMail(mailOptions, function(error, info){

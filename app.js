@@ -17,6 +17,7 @@ import Editdataapp from './src/routers/editdatarouter.js';
 import Editdataimgapp from './src/routers/editdataimgrouter.js';
 import Changepassapp from './src/routers/changepassrouter.js';
 import Deleteuserapp from './src/routers/deleteaccrouter.js';
+import Sendpdfapp from './src/routers/sendpdfrouter.js'
 
 const app = express();
 app.use(bodyParser.json())
@@ -53,7 +54,8 @@ app.use('/',Getprofileapp);
 app.use('/',Editdataapp);
 app.use('/',Editdataimgapp);
 app.use('/',Changepassapp);
-app.use('/',Deleteuserapp)
+app.use('/',Deleteuserapp);
+app.use('/',Sendpdfapp)
 
 // Testing Space...... (After Sucessfully Tested Then Put The Code To Controllers And Routers, Finally Import In The Actual Production Code)
 

@@ -1,39 +1,44 @@
 import nodemailer from 'nodemailer';
+import handlebars from 'handlebars';
+import fs from 'fs';
 
-const Sendotp = async(req,res,next)=>{
-    const email = req.params.id
-    const otp = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
-    // console.log(email)
-    // console.log(otp)
-    try{
-        var transporter = nodemailer.createTransport({
+const sendOtp = async (req, res, next) => {
+    const email = req.params.id;
+    const otp = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
+
+    try {
+        // Read the HTML template file
+        const source = fs.readFileSync('public/mail_templates/otpEmail.hbs', 'utf8');
+        const template = handlebars.compile(source);
+
+        // Render the template with OTP
+        const html = template({ otp });
+
+        // Create Nodemailer transporter
+        const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-              user: 'technicalhubdriverready@gmail.com',
-              pass: 'aqlp joww mqgk fmbw'
+                user: 'technicalhubdriverready@gmail.com',
+                pass: 'aqlp joww mqgk fmbw'
             }
-          });
-          
-          var mailOptions = {
+        });
+
+        // Email options
+        const mailOptions = {
             from: 'technicalhubdriverready@gmail.com',
             to: email,
-            subject: 'Welcome To ASTEC',
-            text: 'This Is Your One Time Password  '+otp+
-            ' Never Share Your OTP to Any One..!',
-          };
-          
-          transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-              console.log(error);
-            } else {
-              console.log('Email sent: ' + info.response);
-            }
-          });
-          return res.send({otp})
-    }catch(err){
-        console.log(err)
-    }
-    return res.status(200).json({otp})
-}
+            subject: 'ASTEC',
+            html: html
+        };
 
-export default Sendotp;
+        // Send email
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Email sent: ' + info.response);
+        return res.send({ otp });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: 'Failed to send OTP' });
+    }
+};
+
+export default sendOtp;
