@@ -1,4 +1,4 @@
-import Editdata from "../controllers/editdata";
+import Editdata from "../controllers/editdata.js";
 import express from 'express';
 const Router = express.Router()
 
