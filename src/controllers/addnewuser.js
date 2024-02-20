@@ -30,7 +30,7 @@ const Addnewuser = async(req,res,next)=>{
         const template = handlebars.compile(source);
         const Name = fname+" "+lname
         // Render the template with OTP
-        const html = template({ otp,Name });
+        const html = template({Name});
         var mailOptions = {
             from: 'technicalhubdriverready@gmail.com',
             to: email,
