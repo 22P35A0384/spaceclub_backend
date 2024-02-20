@@ -6,7 +6,6 @@ const PostLogin = async(req,res,next)=>{
     const mail = req.body.user;
     const pass = req.body.pass;
     let checkmail;
-    let checkpass;
     let isPasswordCorrect;
     try{
         checkmail = await Userschema.findOne({email:mail})

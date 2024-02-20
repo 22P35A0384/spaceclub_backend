@@ -14,7 +14,9 @@ import Updatepassapp from './src/routers/updatepassrouter.js';
 import Getdatabymailapp from './src/routers/getdatabymailrouter.js';
 import Getprofileapp from './src/routers/getprofilerouter.js';
 import Editdataapp from './src/routers/editdatarouter.js';
-
+import Editdataimgapp from './src/routers/editdataimgrouter.js';
+import Changepassapp from './src/routers/changepassrouter.js';
+import Deleteuserapp from './src/routers/deleteaccrouter.js';
 
 const app = express();
 app.use(bodyParser.json())
@@ -48,7 +50,10 @@ app.use('/',Forgotpassapp);
 app.use('/',Updatepassapp); 
 app.use('/',Getdatabymailapp);
 app.use('/',Getprofileapp);
-app.use('/',Editdataapp)
+app.use('/',Editdataapp);
+app.use('/',Editdataimgapp);
+app.use('/',Changepassapp);
+app.use('/',Deleteuserapp)
 
 // Testing Space...... (After Sucessfully Tested Then Put The Code To Controllers And Routers, Finally Import In The Actual Production Code)
 
