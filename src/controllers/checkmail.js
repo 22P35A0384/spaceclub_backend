@@ -2,7 +2,7 @@ import Userschema from '../models/newuser.js';
 
 const Checkmail = async(req,res,next)=>{
     const mail = req.params.mail
-    console.log(mail)
+    // console.log(mail)
     let Checkmailid
     try{
         Checkmailid = await Userschema.findOne({email:mail})

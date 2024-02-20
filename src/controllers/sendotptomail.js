@@ -3,8 +3,8 @@ import nodemailer from 'nodemailer';
 const Sendotp = async(req,res,next)=>{
     const email = req.params.id
     const otp = Math.floor(Math.random() * (999999 - 100000 + 1) ) + 100000;
-    console.log(email)
-    console.log(otp)
+    // console.log(email)
+    // console.log(otp)
     try{
         var transporter = nodemailer.createTransport({
             service: 'gmail',
