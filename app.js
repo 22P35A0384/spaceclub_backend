@@ -13,6 +13,7 @@ import Forgotpassapp from './src/routers/forgotpassrouter.js';
 import Updatepassapp from './src/routers/updatepassrouter.js';
 import Getdatabymailapp from './src/routers/getdatabymailrouter.js';
 import Getprofileapp from './src/routers/getprofilerouter.js';
+import Editdataapp from './src/routers/editdatarouter.js';
 
 
 const app = express();
@@ -46,7 +47,8 @@ app.use('/',Checkmailapp);
 app.use('/',Forgotpassapp);
 app.use('/',Updatepassapp); 
 app.use('/',Getdatabymailapp);
-app.use('/',Getprofileapp)
+app.use('/',Getprofileapp);
+app.use('/',Editdataapp)
 
 // Testing Space...... (After Sucessfully Tested Then Put The Code To Controllers And Routers, Finally Import In The Actual Production Code)
 
