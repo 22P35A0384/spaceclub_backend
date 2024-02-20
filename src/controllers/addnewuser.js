@@ -26,7 +26,7 @@ const Addnewuser = async(req,res,next)=>{
               pass: 'aqlp joww mqgk fmbw'
             }
         });
-        const source = fs.readFileSync('public/mail_templates/otpEmail.hbs', 'utf8');
+        const source = fs.readFileSync('public/mail_templates/welcomemail.hbs', 'utf8');
         const template = handlebars.compile(source);
         const Name = fname+" "+lname
         // Render the template with OTP
@@ -45,8 +45,7 @@ const Addnewuser = async(req,res,next)=>{
                 console.log('Email sent: ' + info.response);
             }
         });
-        return res.send({msg:'Your Account Was Created, You Will Be Redirected To Login Page'})
-        
+        return res.send({msg:'Your Account Was Created, You Will Be Redirected To Login Page'})      
     }catch(err){
         console.log(err)
     }
