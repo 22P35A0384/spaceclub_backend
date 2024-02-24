@@ -5,6 +5,9 @@ let student = new schema({
     Sl_No:{
         type:Number
     },
+    status:{
+        type:String
+    },
     clg:{
         type:String
     },
