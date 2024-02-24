@@ -7,6 +7,7 @@ const Putstudentstatus= async(req,res,next)=>{
     try{
         Passstatus = await Studentsschema.findOneAndUpdate({Roll_No:roll},{status})
         if(Passstatus){
+            console.log(Passstatus)
             return res.status(200).json(true)
         }else{
             console.log(Passstatus)
