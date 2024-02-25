@@ -3,45 +3,62 @@ import nodemailer from 'nodemailer';
 import bcrypt from 'bcryptjs';
 import fs from 'fs';
 import handlebars from 'handlebars';
+import fetch from 'node-fetch';
 
 // Function to upload file to GitHub
 async function uploadToGitHub(filePath, accessToken, repoOwner, repoName) {
-    const content = fs.readFileSync(filePath, { encoding: 'base64' });
-    const apiUrl = `https://api.github.com/repos/22P35A0384/${spaceclub_backend}/contents/public/profile`;
+    try {
+        // Read file content
+        const content = fs.readFileSync(filePath, { encoding: 'base64' });
 
-    const response = await fetch(apiUrl, {
-        method: 'PUT',
-        headers: {
-            'Authorization': `token ${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}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            message: 'Upload file',
-            content: content.toString('base64')
-        })
-    });
+        // Construct GitHub API URL
+        const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
 
-    if (response.ok) {
-        console.log('File uploaded to GitHub successfully');
-    } else {
-        console.error('Failed to upload file to GitHub:', await response.text());
+        // Make HTTP request to upload file to GitHub
+        const response = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: 'Upload file',
+                content: content.toString('base64')
+            })
+        });
+
+        if (response.ok) {
+            console.log('File uploaded to GitHub successfully');
+        } else {
+            console.error('Failed to upload file to GitHub:', await response.text());
+        }
+    } catch (error) {
+        console.error('Error uploading file to GitHub:', error);
     }
 }
 
 const Addnewuser = async (req, res, next) => {
     const profile = (req.file) ? req.file.filename : null;
     const { fname, lname, password, email } = req.body;
-    const hashedPassowrd = bcrypt.hashSync(password);
-    const formdata = new Newuserschema({
-        fname,
-        lname,
-        password: hashedPassowrd,
-        email,
-        profile
-    });
+
     try {
+        // Hash the password
+        const hashedPassword = bcrypt.hashSync(password, 10); // You can specify the number of salt rounds (e.g., 10)
+
+        // Create a new user document
+        const formdata = new Newuserschema({
+            fname,
+            lname,
+            password: hashedPassword,
+            email,
+            profile
+        });
+
+        // Save the new user data to the database
         await formdata.save();
-        var transporter = nodemailer.createTransport({
+
+        // Send a welcome email
+        const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
                 user: 'technicalhubdriverready@gmail.com',
@@ -50,27 +67,21 @@ const Addnewuser = async (req, res, next) => {
         });
         const source = fs.readFileSync('public/mail_templates/welcomemail.hbs', 'utf8');
         const template = handlebars.compile(source);
-        const Name = fname + " " + lname;
+        const Name = `${fname} ${lname}`;
         const html = template({ Name });
-        var mailOptions = {
+        const mailOptions = {
             from: 'technicalhubdriverready@gmail.com',
             to: email,
             subject: 'Welcome To ASTE',
             html: html
         };
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Email sent: ' + info.response);
-            }
-        });
+        await transporter.sendMail(mailOptions);
 
         // Upload profile photo to GitHub
         const filePath = `public/profiles/${profile}`;
-        const accessToken = 'YOUR_GITHUB_ACCESS_TOKEN';
-        const repoOwner = 'repo_owner';
-        const repoName = 'repo_name';
+        const accessToken = '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';
+        const repoOwner = '22P35A0384';
+        const repoName = 'spaceclub_backend';
 
         await uploadToGitHub(filePath, accessToken, repoOwner, repoName);
 
