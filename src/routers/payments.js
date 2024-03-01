@@ -5,15 +5,15 @@ import crypto from 'crypto';
 
 Router.post('/registration',async(req,res,next)=>{
     try{
-        console.log('rzp_test_mGGsDwW7xRGWWm')
-        console.log('dcVrXWziSMbSMpUbKb8XgVLT')
+        // console.log('rzp_test_mGGsDwW7xRGWWm')
+        // console.log('dcVrXWziSMbSMpUbKb8XgVLT')
         const instance = new Razorpay({
             key_id: 'rzp_test_mGGsDwW7xRGWWm',
             key_secret: 'dcVrXWziSMbSMpUbKb8XgVLT',
         });
 
         const options = {
-            amount:req.body.amount * 100,
+            amount:req.body.amount * 1,
             currency:'INR',
             receipt:crypto.randomBytes(10).toString('hex'),
         };
