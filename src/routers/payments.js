@@ -8,8 +8,8 @@ Router.post('/registration',async(req,res,next)=>{
         console.log('rzp_test_mGGsDwW7xRGWWm')
         console.log('dcVrXWziSMbSMpUbKb8XgVLT')
         const instance = new Razorpay({
-            key_id: rzp_test_mGGsDwW7xRGWWm,
-            key_secret: dcVrXWziSMbSMpUbKb8XgVLT,
+            key_id: 'rzp_test_mGGsDwW7xRGWWm',
+            key_secret: 'dcVrXWziSMbSMpUbKb8XgVLT',
         });
 
         const options = {
@@ -40,7 +40,7 @@ Router.post('/verify',async(req,res,next)=>{
             razorpay_signature}=req.body;
         const sign = razorpay_order_id+"|"+razorpay_payment_id;
         const expectedSign = crypto
-            .createHmac("sha256",dcVrXWziSMbSMpUbKb8XgVLT)
+            .createHmac("sha256",'dcVrXWziSMbSMpUbKb8XgVLT')
             .update(sign.toString())
             .digest("hex");
         if(razorpay_signature===expectedSign){
