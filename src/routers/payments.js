@@ -5,9 +5,11 @@ import crypto from 'crypto';
 
 Router.post('/registration',async(req,res,next)=>{
     try{
+        console.log(process.env.KEY_ID)
+        console.log(process.env.KEY_SECRET)
         const instance = new Razorpay({
-            key_id:process.env.KEY_ID,
-            key_secret:process.env.KEY_SECRET,
+            key_id: process.env.KEY_ID,
+            key_secret: process.env.KEY_SECRET,
         });
 
         const options = {
