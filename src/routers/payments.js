@@ -6,8 +6,8 @@ import crypto from 'crypto';
 Router.post('/registration',async(req,res,next)=>{
     try{
         const instance = new Razorpay({
-            key_id:"rzp_test_PdEEy06YxH5cHq",
-            key_secret:"pf6kIDuPnbNbETvzuHe3vR6Z",
+            key_id:process.env.KEY_ID,
+            key_secret:process.env.KEY_SECRET,
         });
 
         const options = {
@@ -38,7 +38,7 @@ Router.post('/verify',async(req,res,next)=>{
             razorpay_signature}=req.body;
         const sign = razorpay_order_id+"|"+razorpay_payment_id;
         const expectedSign = crypto
-            .createHmac("sha256","pf6kIDuPnbNbETvzuHe3vR6Z")
+            .createHmac("sha256",process.env.KEY_SECRET)
             .update(sign.toString())
             .digest("hex");
         if(razorpay_signature===expectedSign){
