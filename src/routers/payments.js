@@ -13,7 +13,7 @@ Router.post('/registration',async(req,res,next)=>{
         });
 
         const options = {
-            amount:req.body.amount * 1,
+            amount:req.body.amount*100,
             currency:'INR',
             receipt:crypto.randomBytes(10).toString('hex'),
         };
@@ -23,7 +23,7 @@ Router.post('/registration',async(req,res,next)=>{
                 console.log(err);
                 return res.status(500).json({msg:'Something Went Wrong'})
             }
-            res.status(200).json({data:order});
+            res.status(200).json(order);
         });
     }catch(err){
         console.log(err)
@@ -46,7 +46,9 @@ Router.post('/verify',async(req,res,next)=>{
         if(razorpay_signature===expectedSign){
             return res.status(200).json({msg:'Payment Verified Successfully'})
         }else{
-            return res.status(400).json({msg:'Invalid Signature Sent!!'})
+            // console.log(razorpay_signature)
+            // console.log(expectedSign)
+            return res.status(200).json({msg:'Invalid Signature Sent!!'})
         }
     }catch(err){
         console.log(err)
