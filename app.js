@@ -21,6 +21,7 @@ import Sendpdfapp from './src/routers/sendpdfrouter.js';
 import Putstudentstatusapp from './src/routers/putstudentstatusrouter.js';
 import Paymentsapp from './src/routers/payments.js';
 import Resultapp from './src/routers/resultrouter.js';
+import Adityaloginsapp from './src/routers/adityaloginsrouter.js';
 
 const app = express();
 app.use(bodyParser.json())
@@ -62,6 +63,7 @@ app.use('/',Sendpdfapp);
 app.use('/',Putstudentstatusapp);
 app.use('/api/payment/',Paymentsapp);
 app.use('/',Resultapp);
+app.use('/',Adityaloginsapp);
 
 // Testing Space...... (After Sucessfully Tested Then Put The Code To Controllers And Routers, Finally Import In The Actual Production Code)
 
