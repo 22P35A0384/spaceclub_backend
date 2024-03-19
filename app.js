@@ -23,6 +23,7 @@ import Paymentsapp from './src/routers/payments.js';
 import Resultapp from './src/routers/resultrouter.js';
 import Adityaloginsapp from './src/routers/adityaloginsrouter.js';
 import Chatbotapp from './src/routers/chatbotrouter.js';
+import Spotlightapp from './src/routers/spotlightrouter.js';
 
 const app = express();
 app.use(bodyParser.json())
@@ -68,9 +69,10 @@ app.use('/api/payment/',Paymentsapp);
 app.use('/',Resultapp);
 app.use('/',Adityaloginsapp);
 app.use('/',Chatbotapp);
+app.use('/',Spotlightapp)
 
 // Testing Space...... (After Sucessfully Tested Then Put The Code To Controllers And Routers, Finally Import In The Actual Production Code)
 
 app.get('/testing',(req,res,next)=>{
-    res.send('hello world')
+    return res.status(200).json({msg:'testing'})
 })
