@@ -29,6 +29,7 @@ const lexClient = new AWS.LexRuntime();
 
 const Chatbot=(req,res,next)=>{
     const user_input = req.body.user_input;
+    console.log(user_input)
     const params = {
         botAlias: 'bot',
         botName: 'clgapp',
