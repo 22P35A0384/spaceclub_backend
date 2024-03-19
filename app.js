@@ -22,9 +22,12 @@ import Putstudentstatusapp from './src/routers/putstudentstatusrouter.js';
 import Paymentsapp from './src/routers/payments.js';
 import Resultapp from './src/routers/resultrouter.js';
 import Adityaloginsapp from './src/routers/adityaloginsrouter.js';
+import Chatbotapp from './src/routers/chatbotrouter.js';
 
 const app = express();
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
 app.use(cors())
 mongoose.connect("mongodb+srv://gangadharjami:Xyd11TsTf0GfkNLu@cluster0.egjdqci.mongodb.net/cluster0?retryWrites=true&w=majority")
     .then(() => {
@@ -64,6 +67,7 @@ app.use('/',Putstudentstatusapp);
 app.use('/api/payment/',Paymentsapp);
 app.use('/',Resultapp);
 app.use('/',Adityaloginsapp);
+app.use('/',Chatbotapp);
 
 // Testing Space...... (After Sucessfully Tested Then Put The Code To Controllers And Routers, Finally Import In The Actual Production Code)
 

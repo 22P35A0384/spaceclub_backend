@@ -4,12 +4,16 @@ const Getlogin=async(req,res,next)=>{
     const user = req.body.username;
     const pass = req.body.password;
     let Resultstatus;
+    let Userstatus;
     try{
+        Userstatus = await Adityalogins.findOne({username:user})
         Resultstatus = await Adityalogins.findOne({username:user,password:pass})
-        if(Resultstatus){
-            return res.status(200).json(true)
-        }else{
+        if(!Userstatus){
+            return res.status(200).json(null)
+        }else if(!Resultstatus){
             return res.status(200).json(false)
+        }else{
+            return res.status(200).json(Resultstatus)
         }
     }catch(err){
         console.log(err)
