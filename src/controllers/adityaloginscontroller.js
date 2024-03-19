@@ -1,7 +1,8 @@
 import Adityalogins from "../models/adityalogins.js";
 
 const Getlogin=async(req,res,next)=>{
-    const user = req.body.username;
+    const username = req.body.username;
+    const user = username.toUpperCase()
     const pass = req.body.password;
     let Resultstatus;
     let Userstatus;
